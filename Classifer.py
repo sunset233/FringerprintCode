@@ -7,7 +7,6 @@ from PIL import Image
 from io import BytesIO
 import matplotlib.pyplot as plt
 import tensorflow as tf
-#from tensorflow.keras.preprocessing import image
 from tensorflow.keras.applications.densenet import preprocess_input
 
 target_size = (224, 224)
@@ -64,4 +63,4 @@ def getResult(img_path):
     return labels[tuple[label]]
 
 if __name__ == '__main__':
-    getResult('GUI_Module/test/3-9.jpg')
+    getResult('GUI_Module/test/4-3.jpg')

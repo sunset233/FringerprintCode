@@ -3,4 +3,4 @@
 model.h5
 /__pycache__/*
 /GUI_Module/__pycache__/*
-/GUI_Module/test/*
+/test/*

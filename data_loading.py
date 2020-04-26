@@ -11,10 +11,7 @@ def load_csv(root, filename, name2label):
         # 如果csv文件不存在，则创建
         images = []
         for name in name2label.keys(): # 遍历所有子目录，获得所有的图片
-            # 只考虑后缀为png,jpg,jpeg的图片
-            images += glob.glob(os.path.join(root, name, '*.png'))
             images += glob.glob(os.path.join(root, name, '*.jpg'))
-            images += glob.glob(os.path.join(root, name, '*.jpeg'))
         # 打印数据集信息：
         print(len(images), images)
         random.shuffle(images) # 随机打散顺序
@@ -57,15 +54,15 @@ def load_nist(root, mode='train'):
     # [file1,file2,], [3,1]
     images, labels = load_csv(root, 'images.csv', name2label)
 
-    if mode == 'train':  # 60%
-        images = images[:int( len(images))]
-        labels = labels[:int( len(labels))]
-    elif mode == 'val':  # 20% = 60%->80%
-        images = images[int(0.65 * len(images)):int(0.85 * len(images))]
-        labels = labels[int(0.65 * len(labels)):int(0.85 * len(labels))]
-    else:  # 20% = 80%->100%
-        images = images[int(0.75 * len(images)):]
-        labels = labels[int(0.75 * len(labels)):]
+    if mode == 'train':  # 70%
+        images = images[:int(0.7 * len(images))]
+        labels = labels[:int(0.7 * len(labels))]
+    elif mode == 'val':  # 20% = 70%->90%
+        images = images[int(0.7 * len(images)):int(0.9 * len(images))]
+        labels = labels[int(0.7 * len(labels)):int(0.9 * len(labels))]
+    else:  # 10% = 90%->100%
+        images = images[int(0.9 * len(images)):]
+        labels = labels[int(0.9 * len(labels)):]
 
     return images, labels, name2label
 
@@ -109,7 +106,7 @@ def main():
 
 
 
-    # 加载pokemon数据集，指定加载训练集
+    # 载入指纹数据集指定加载训练集
     images, labels, table = load_nist('nist', 'train')
     print('images:', len(images), images)
     print('labels:', len(labels), labels)

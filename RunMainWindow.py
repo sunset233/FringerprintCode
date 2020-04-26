@@ -40,6 +40,17 @@ class MainWindow(QMainWindow):
         search.addAction(result)
         result.triggered.connect(self.TrainingResult)
 
+        # 帮助菜单栏功能
+        instruction = QAction('使用说明',self)
+        help.addAction(instruction)
+        instruction.triggered.connect(self.Helpme)
+        contact = QAction('联系我们',self)
+        help.addAction(contact)
+        contact.triggered.connect(self.Contactus)
+        about = QAction('关于',self)
+        help.addAction(about)
+        about.triggered.connect(self.About)
+
         self.button1 = QPushButton('加载图片',self)
         self.button1.move(20, 150)
         self.button1.clicked.connect(self.ShowImage)
@@ -106,6 +117,23 @@ class MainWindow(QMainWindow):
         newLelt = (screen.width() -size.width()) / 2
         newTop = (screen.height() - size.height()) / 2
         self.move(newLelt,newTop)
+
+    def Contactus(self):
+        QMessageBox.about(self,'联系我们','Email:123456789@qq.com')
+
+    def Helpme(self):
+        instruction = 'model_data/instruction.txt'
+        self.window = TextWindow()
+        f = open(instruction, encoding='utf-8', mode='r')
+        with f:
+            data = f.read()
+            self.window.textlabel.setText(data)
+        self.window.textlabel.setWindowTitle('使用说明')
+        self.window.textlabel.resize(500, 200)
+        self.window.textlabel.show()
+
+    def About(self):
+        QMessageBox.about(self,'关于','软件版本号：0.0.1')
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)

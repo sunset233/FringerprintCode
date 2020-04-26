@@ -61,7 +61,7 @@ db_test = db_test.map(preprocess).batch(batchsz)
 
 # 加载DenseNet网络模型，并去掉最后一层全连接层，最后一个池化层设置为max pooling
 
-net = tf.keras.applications.DenseNet201(weights = 'imagenet', include_top=False, pooling='max')
+net = tf.keras.applications.DenseNet169(weights = 'imagenet', include_top=False, pooling='max')
 
 # 设计为不参与优化，即MobileNet这部分参数固定不动
 net.trainable = False
@@ -70,7 +70,7 @@ newnet = keras.Sequential([
     layers.Dense(1024, activation='relu'), # 追加全连接层
     layers.BatchNormalization(), # 追加BN层
     layers.Dropout(rate=0.5), # 追加Dropout层，防止过拟合
-    layers.Dense(10) # 根据宝可梦数据的任务，设置最后一层输出节点数为5
+    layers.Dense(10) # 根据指纹数据集，设置最后一层输出节点数为10， 用来表示指纹的类别数
 ])
 newnet.build(input_shape=(4,224,224,3))
 newnet.summary()
