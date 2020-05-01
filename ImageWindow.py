@@ -1,6 +1,7 @@
-import sys
-from PyQt5.QtWidgets import *
+
 from PyQt5.QtGui import QIcon
+from PyQt5.QtWidgets import QWidget, QLabel, QDesktopWidget
+
 
 class ImageWindow(QWidget):
     def __init__(self):

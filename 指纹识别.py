@@ -1,11 +1,13 @@
-import sys, math
-from PyQt5.QtWidgets import *
-from PyQt5.QtGui import *
-from PyQt5.QtCore import *
-from Classifer import *
-from GUI_Module.ImageWindow import ImageWindow
+import sys
 
-from GUI_Module.textWindow import TextWindow
+from PyQt5.QtGui import QPixmap, QIcon
+from PyQt5.QtWidgets import QAction, QPushButton, QLabel, QFileDialog, QMainWindow, QMessageBox, QDesktopWidget, \
+    QApplication
+
+from Classifer import getResult
+from ImageWindow import ImageWindow
+
+from textWindow import TextWindow
 
 
 class MainWindow(QMainWindow):
@@ -71,7 +73,7 @@ class MainWindow(QMainWindow):
         self.imageLabel.setPixmap(QPixmap(pixmap))
 
     def ModelInfo(self):
-        model_path = 'model_data/model.txt'
+        model_path = 'D:/python program/NIST_Training/model_data/model.txt'
         self.window = TextWindow()
         f = open(model_path, encoding='utf-8', mode='r')
         with f:
@@ -82,7 +84,7 @@ class MainWindow(QMainWindow):
         self.window.textlabel.show()
 
     def  TrainingResult(self):
-        img_path = 'model_data/model.svg'
+        img_path = 'D:/python program/NIST_Training/model_data/model.svg'
         self.img_show = ImageWindow()
         pixmap = QPixmap(img_path)
         self.img_show.imagelabel.setPixmap(pixmap)
@@ -98,7 +100,7 @@ class MainWindow(QMainWindow):
 
 
     def TrainingInfo(self):
-        training_path = 'model_data/training_data.txt'
+        training_path = 'D:/python program/NIST_Training/model_data/training_data.txt'
         self.window = TextWindow()
         f = open(training_path, encoding='utf-8', mode='r')
         with f:
@@ -122,7 +124,7 @@ class MainWindow(QMainWindow):
         QMessageBox.about(self,'联系我们','Email:123456789@qq.com')
 
     def Helpme(self):
-        instruction = 'model_data/instruction.txt'
+        instruction = 'D:/python program/NIST_Training/model_data/instruction.txt'
         self.window = TextWindow()
         f = open(instruction, encoding='utf-8', mode='r')
         with f:
@@ -137,7 +139,7 @@ class MainWindow(QMainWindow):
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    app.setWindowIcon(QIcon('finger.ico'))
+    app.setWindowIcon(QIcon('D:/python program/NIST_Training/finger.ico'))
     main = MainWindow()
     main.center()
     main.show()

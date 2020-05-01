@@ -87,13 +87,14 @@ newnet.compile(optimizer=optimizers.Adam(lr=1e-3),
                metrics=['accuracy'])
 history  = newnet.fit(db_train, validation_data=db_val, validation_freq=1, epochs=100,
            callbacks=[early_stopping])
+newnet.save('model.h5')
 history = history.history
 print(history.keys())
 print(history['val_accuracy'])
 print(history['accuracy'])
 test_acc = newnet.evaluate(db_test)
 
-newnet.save('model.h5')
+
 
 
 plt.figure()

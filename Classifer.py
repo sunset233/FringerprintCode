@@ -63,4 +63,13 @@ def getResult(img_path):
     return labels[tuple[label]]
 
 if __name__ == '__main__':
-    getResult('GUI_Module/test/4-3.jpg')
+    '''getResult('D:/python program/NIST_Training/test/1-11.jpg')#赵云 
+    getResult('D:/python program/NIST_Training/test/2-3.jpg') #韩梅梅
+    getResult('D:/python program/NIST_Training/test/3-23.jpg')#黄飞鸿
+    getResult('D:/python program/NIST_Training/test/4-8.jpg') #拖米
+    getResult('D:/python program/NIST_Training/test/5-16.jpg')#黄飞鸿
+    getResult('D:/python program/NIST_Training/test/6-5.jpg') #拖米'''
+    getResult('D:/python program/NIST_Training/test/7-23.jpg')#韩梅梅
+    getResult('D:/python program/NIST_Training/test/8-18.jpg')#韩梅梅
+    getResult('D:/python program/NIST_Training/test/9-3.jpg') #拖米
+    getResult('D:/python program/NIST_Training/test/10-16.jpg')#黄飞鸿

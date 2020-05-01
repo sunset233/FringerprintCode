@@ -1,6 +1,8 @@
 import sys
-from PyQt5.QtWidgets import *
+
 from PyQt5.QtGui import QIcon
+from PyQt5.QtWidgets import QWidget, QTextBrowser, QDesktopWidget
+
 
 class TextWindow(QWidget):
     def __init__(self):
