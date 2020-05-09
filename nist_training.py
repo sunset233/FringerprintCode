@@ -50,14 +50,6 @@ batchsz = 32
 images, labels, table = load_nist('nist',mode='train')
 db_train = tf.data.Dataset.from_tensor_slices((images, labels))
 db_train = db_train.shuffle(1000).map(preprocess).batch(batchsz)
-# 创建验证集Datset对象
-images2, labels2, table = load_nist('nist',mode='val')
-db_val = tf.data.Dataset.from_tensor_slices((images2, labels2))
-db_val = db_val.map(preprocess).batch(batchsz)
-# 创建测试集Datset对象
-images3, labels3, table = load_nist('nist',mode='test')
-db_test = tf.data.Dataset.from_tensor_slices((images3, labels3))
-db_test = db_test.map(preprocess).batch(batchsz)
 
 # 加载DenseNet网络模型，并去掉最后一层全连接层，最后一个池化层设置为max pooling
 net = tf.keras.applications.DenseNet169(include_top=False, pooling='max')
@@ -84,23 +76,18 @@ early_stopping = EarlyStopping(
 newnet.compile(optimizer=optimizers.Adam(lr=1e-3),
                loss=losses.CategoricalCrossentropy(from_logits=True),
                metrics=['accuracy'])
-history  = newnet.fit(db_train, validation_data=db_val, validation_freq=1, epochs=100,
+history  = newnet.fit(db_train, epochs=100,
            callbacks=[early_stopping])
 history = history.history
 print(history.keys())
-print(history['val_accuracy'])
 print(history['accuracy'])
-test_acc = newnet.evaluate(db_test)
 
 plt.figure()
-returns = history['val_accuracy']
-plt.plot(np.arange(len(returns)), returns, label='验证准确率')
-plt.plot(np.arange(len(returns)), returns, 's')
 returns = history['accuracy']
 plt.plot(np.arange(len(returns)), returns, label='训练准确率')
 plt.plot(np.arange(len(returns)), returns, 's')
 
-plt.plot([len(returns)-1],[test_acc[-1]], 'D', label='测试准确率')
+plt.plot([len(returns)-1], 'D', label='测试准确率')
 plt.legend()
 plt.xlabel('Epoch')
 plt.ylabel('准确率')

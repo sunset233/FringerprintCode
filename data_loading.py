@@ -54,15 +54,9 @@ def load_nist(root, mode='train'):
     # [file1,file2,], [3,1]
     images, labels = load_csv(root, 'images.csv', name2label)
 
-    if mode == 'train':  # 70%
-        images = images[:int(0.7 * len(images))]
-        labels = labels[:int(0.7 * len(labels))]
-    elif mode == 'val':  # 20% = 70%->90%
-        images = images[int(0.7 * len(images)):int(0.9 * len(images))]
-        labels = labels[int(0.7 * len(labels)):int(0.9 * len(labels))]
-    else:  # 10% = 90%->100%
-        images = images[int(0.9 * len(images)):]
-        labels = labels[int(0.9 * len(labels)):]
+    if mode == 'train':
+        images = images[:int(len(images))]
+        labels = labels[:int(len(labels))]
 
     return images, labels, name2label
 
